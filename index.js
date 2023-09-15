@@ -30,9 +30,23 @@ app.post('/signup', (req,res) => {
         }
         else{
         return res.json(data);
-        console.log(data)
     }
     })
+})
+app.post('/login', (req,res) => {
+    const sql = "SELECT * FROM login WHERE  `email`= ? `password` = ?";
+    db.query(sql,[ req.body.email, req.body.password], (data,err) => {
+        if(err){
+            res.send(err)
+        }
+        if(data.length > 0){
+            return res.json("Succss")
+        }
+        else{
+            return res.json("Failed")
+        }
+    }
+    )
 })
 
 
